@@ -9,7 +9,7 @@ app.use((err, req, res, next) => {
 });
 
 app.use(cors({
-    origin: ["http://localhost:5173", "https://user-backend-mxkm.onrender.com"],
+    origin: ["http://localhost:5173", "https://user-admin-web.netlify.app"],
     credentials: true,
   }));
   
