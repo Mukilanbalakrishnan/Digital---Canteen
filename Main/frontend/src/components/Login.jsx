@@ -25,7 +25,7 @@ const Login = () => {
         setMessage('');
 
         try {
-            const response = await axios.post('http://localhost:5000/api/check-user-details', { userID });
+            const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/check-user-details`, { userID });
 
 
             if (response.data.hasPassword) {
@@ -44,7 +44,7 @@ const Login = () => {
         event.preventDefault();
 
         try {
-            const response = await fetch('http://localhost:5000/api/login-user-details', {
+            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/login-user-details`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ userID, password }),
@@ -85,7 +85,7 @@ const Login = () => {
         setMessage('');
 
         try {
-            await axios.post('http://localhost:5000/api/set-user-password', {
+            await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/set-user-password`, {
                 userID,
                 newPassword,
                 confirmPassword
