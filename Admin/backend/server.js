@@ -8,12 +8,11 @@ app.use((err, req, res, next) => {
     res.status(500).send('Something broke!');
 });
 
-app.use(
-    cors({
-        origin: ["https://admin-backend-web.netlify.app/"],
-        credentials: true,
-    })
-);
+app.use(cors({
+    origin: ["http://localhost:5173", "https://admin-backend-web.netlify.app"],
+    credentials: true,
+  }));
+  
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
