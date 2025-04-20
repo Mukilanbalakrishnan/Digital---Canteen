@@ -8,7 +8,7 @@ const ShopList = () => {
     useEffect(() => {
         const fetchShops = async () => {
             try {
-                const res = await fetch("http://localhost:5000/api/shops");
+                const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/shops`);
                 const data = await res.json();
                 setShops(data);
             } catch (err) {

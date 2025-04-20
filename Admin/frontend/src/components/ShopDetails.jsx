@@ -11,7 +11,7 @@ const ShopDetails = () => {
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const response = await fetch(`http://localhost:5000/api/shop-details?shopName=${shopName}`);
+                const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/shop-details?shopName=${shopName}`);
                 const data = await response.json();
                 setProducts(data);
             } catch (error) {
@@ -25,7 +25,7 @@ const ShopDetails = () => {
     useEffect(() => {
         const fetchTotalAmount = async () => {
             try {
-                const response = await fetch(`http://localhost:5000/api/orders/total/${shopName}`);
+                const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/orders/total/${shopName}`);
                 const data = await response.json();
                 setTotalAmount(data.totalAmount);
             } catch (error) {
