@@ -27,7 +27,7 @@ const ShopPage = () => {
 
     const fetchShopData = async () => {
         try {
-            const response = await fetch(`http://localhost:5000/api/shop-details?shopName=${shopName}`);
+            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/shop-details?shopName=${shopName}`);
 
             const data = await response.json();
             setShopData(data);
@@ -45,7 +45,7 @@ const ShopPage = () => {
         }
 
         try {
-            const response = await fetch("http://localhost:5000/api/add-product", {
+            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/add-product`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ shopName, productName, quantity, price, category }),
@@ -70,7 +70,7 @@ const ShopPage = () => {
 
     const fetchOrders = async () => {
         try {
-            const response = await fetch(`http://localhost:5000/api/orders/${shopName}`);
+            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/orders/${shopName}`);
 
             const data = await response.json();
             setOrders(data);
@@ -94,7 +94,7 @@ const ShopPage = () => {
 
     const handleDeliver = async (orderId) => {
         try {
-            const response = await fetch(`http://localhost:5000/api/orders/deliver/${orderId}`, {
+            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/orders/deliver/${orderId}`, {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" }
             });
@@ -116,7 +116,7 @@ const ShopPage = () => {
 
     const fetchDeliveredOrders = async () => {
         try {
-            const response = await fetch(`http://localhost:5000/api/delivered-orders/${shopName}`);
+            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/delivered-orders/${shopName}`);
             const data = await response.json();
             setFilteredOrders(data);
 
@@ -132,7 +132,7 @@ const ShopPage = () => {
         try {
             console.log("Declining order with ID:", orderId);
 
-            const response = await fetch(`http://localhost:5000/api/orders/decline/${orderId}`, {
+            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/orders/decline/${orderId}`, {
                 method: "DELETE",
             });
 
@@ -154,7 +154,7 @@ const ShopPage = () => {
 
     const handleSave = async (shopName, productName) => {
         try {
-            const res = await fetch("http://localhost:5000/api/products/update", {
+            const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/products/update`, {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
@@ -196,7 +196,7 @@ const ShopPage = () => {
     const handleGroupedDecline = async (orderIds) => {
         try {
             const responses = await Promise.all(orderIds.map(orderId =>
-                fetch(`http://localhost:5000/api/orders/decline/${orderId}`, {
+                fetch(`${import.meta.env.VITE_BACKEND_URL}/api/orders/decline/${orderId}`, {
                     method: "DELETE",
                 })
             ));
@@ -224,7 +224,7 @@ const ShopPage = () => {
     useEffect(() => {
         const fetchTotalAmount = async () => {
             try {
-                const response = await fetch(`http://localhost:5000/api/orders/total/${shopName}`);
+                const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/orders/total/${shopName}`);
                 const data = await response.json();
                 setTotalAmount(data.totalAmount); // Set the total amount for the shop
             } catch (error) {
@@ -253,7 +253,7 @@ const ShopPage = () => {
 
         try {
             const response = await fetch(
-                `http://localhost:5000/api/Shopreport?shopName=${shopName}&month=${month}&year=${year}`
+                `${import.meta.env.VITE_BACKEND_URL}/api/Shopreport?shopName=${shopName}&month=${month}&year=${year}`
             );
 
             if (!response.ok) {

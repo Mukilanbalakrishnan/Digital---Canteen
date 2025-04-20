@@ -8,16 +8,10 @@ app.use((err, req, res, next) => {
     res.status(500).send('Something broke!');
 });
 
-app.use(
-    cors({
-        origin: [
-            "http://localhost:5173",                        // Vite dev server
-            "http://localhost:3000",                        // CRA dev server
-            "https://radiant-meerkat-5f7312.netlify.app"      // ✅ your actual Netlify domain
-        ],
-        credentials: true,
-    })
-);
+app.use(cors({
+    origin: ["http://localhost:5173", "https://shopadmin-web-site.netlify.app"],
+    credentials: true,
+  }));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

@@ -11,7 +11,7 @@ const Shops = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        fetch("http://localhost:5000/api/shops")
+        fetch(`${import.meta.env.VITE_BACKEND_URL}/api/shops`)
 
             .then((response) => response.json())
             .then((data) => setShops(data))
@@ -20,7 +20,7 @@ const Shops = () => {
 
     const handleShopClick = async (shopName) => {
         try {
-            const response = await fetch(`http://localhost:5000/api/get-shop?shopName=${shopName}`);
+            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/get-shop?shopName=${shopName}`);
             const data = await response.json();
 
             if (data.exists) {
@@ -43,7 +43,7 @@ const Shops = () => {
 
     const handleLogin = async () => {
         try {
-            const response = await fetch("http://localhost:5000/api/validate-shop", {
+            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/validate-shop`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ shopName: selectedShop.shopName, password }),
@@ -64,7 +64,7 @@ const Shops = () => {
 
     const handleSetPassword = async () => {
         try {
-            const response = await fetch("http://localhost:5000/api/set-password", {
+            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/set-password`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ shopName: selectedShop.shopName, password: newPassword }),
