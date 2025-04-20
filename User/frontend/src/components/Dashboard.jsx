@@ -19,7 +19,7 @@ const Dashboard = () => {
 
     const fetchUserDetails = async (userID) => {
         try {
-            const response = await fetch(`http://localhost:5000/api/user-details/${userID}`);
+            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/user-details/${userID}`);
             const data = await response.json();
             if (response.ok) {
                 setUser(data);
@@ -42,7 +42,7 @@ const Dashboard = () => {
     }, [user]);
 
     useEffect(() => {
-        fetch("http://localhost:5000/api/shops")
+        fetch(`${import.meta.env.VITE_BACKEND_URL}/api/shops`)
             .then(res => res.json())
             .then(data => setShops(data))
             .catch(error => console.error("Error fetching shops:", error));
@@ -68,7 +68,7 @@ const Dashboard = () => {
         }
 
         try {
-            const response = await fetch(`http://localhost:5000/api/report?userID=${user.userID}&month=${month}&year=${year}`);
+            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/report?userID=${user.userID}&month=${month}&year=${year}`);
             if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
             const data = await response.json();
             setReportData(data);
@@ -82,7 +82,7 @@ const Dashboard = () => {
     useEffect(() => {
         const fetchUnviewedOrder = async () => {
             try {
-                const response = await fetch(`http://localhost:5000/api/orders/user/${user.userID}`);
+                const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/orders/user/${user.userID}`);
                 const data = await response.json();
                 if (data.length > 0) {
                     setCurrentOrder(data[0]);
@@ -96,7 +96,7 @@ const Dashboard = () => {
 
     const handleOk = async () => {
         try {
-            await fetch(`http://localhost:5000/api/orders/viewed/${currentOrder.orderId}`, {
+            await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/orders/viewed/${currentOrder.orderId}`, {
                 method: "PUT",
             });
             setCurrentOrder(null);
