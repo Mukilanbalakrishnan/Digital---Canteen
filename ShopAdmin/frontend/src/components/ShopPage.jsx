@@ -505,6 +505,7 @@ const ShopPage = () => {
                                 <thead className="bg-gray-100">
                                     <tr>
                                         <th className="p-2 border">Shop</th>
+                                        <th className="p-2 border">UserId</th>
                                         <th className="p-2 border">Product</th>
                                         <th className="p-2 border">Qty</th>
                                         <th className="p-2 border">Price</th>
@@ -515,6 +516,7 @@ const ShopPage = () => {
                                     {shopReportData.map((order, index) => (
                                         <tr key={index} className="text-center">
                                             <td className="p-2 border">{order.shopName}</td>
+                                            <td className="p-2 border">{order.userID}</td>
                                             <td className="p-2 border">{order.productName}</td>
                                             <td className="p-2 border">{order.quantity}</td>
                                             <td className="p-2 border">₹{order.totalAmount}</td>

@@ -495,6 +495,7 @@ app.get('/api/Shopreport', async (req, res) => {
         const endDate = new Date(`${year}-${month}-31`);
 
         const orders = await OrderDetails.find({
+            // userID: userID,
             shopName: shopName,
             delivered: true,
             timestamp: {$gte: startDate, $lte: endDate}
