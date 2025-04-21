@@ -496,7 +496,7 @@ const ShopPage = () => {
                 </div>
 
                 {showShopReport && (
-                    <div className="mt-6">
+                    <div className="mt-6 overflow-x-auto">
                         <h4 className="text-lg font-semibold text-gray-700 mb-3">
                             Report for Selected Month and Year
                         </h4>
