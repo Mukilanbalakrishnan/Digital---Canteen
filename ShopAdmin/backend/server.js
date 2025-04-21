@@ -499,7 +499,7 @@ app.get('/api/Shopreport', async (req, res) => {
             shopName: shopName,
             delivered: true,
             timestamp: {$gte: startDate, $lte: endDate}
-        }).select("shopName productName quantity totalAmount timestamp delivered status");
+        }).select("shopName userID productName quantity totalAmount timestamp delivered status");
 
         res.json(orders);
     } catch (error) {
