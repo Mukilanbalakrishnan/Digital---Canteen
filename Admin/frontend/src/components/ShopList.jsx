@@ -44,7 +44,7 @@ const ShopList = () => {
                                 </h3>
                             </div>
                             <div className="font-semibold text-indigo-600 pl-[53px]">
-                                Ownwer: <span className="font-bold text-orange-700">{shop.shopOwnerName}</span>
+                                Owner: <span className="font-bold text-orange-700">{shop.shopOwnerName}</span>
                             </div>
                         </Link>
                     ))}
