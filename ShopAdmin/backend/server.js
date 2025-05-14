@@ -372,56 +372,56 @@ app.get("/api/delivered-orders/:shopName", async (req, res) => {
 
 
 // TO HANDLE DECLINE
-// app.delete("/api/orders/decline/:orderId", async (req, res) => {
-//     try {
-//         const orderId = req.params.orderId;
+app.delete("/api/orders/decline/:orderId", async (req, res) => {
+    try {
+        const orderId = req.params.orderId;
 
-//         // Step 1: Find the order
-//         const order = await OrderDetails.findById(orderId);
-//         if (!order) {
-//             console.log("Order not found");
-//             return res.status(404).json({ message: "Order not found" });
-//         }
+        // Step 1: Find the order
+        const order = await OrderDetails.findById(orderId);
+        if (!order) {
+            console.log("Order not found");
+            return res.status(404).json({ message: "Order not found" });
+        }
 
-//         const { userID, productName, quantity, totalAmount, shopName } = order;
+        const { userID, productName, quantity, totalAmount, shopName } = order;
 
-//         // ✅ Step 2: Save rejected copy BEFORE modifying anything
-//         const rejectedOrder = {
-//             ...order.toObject(),
-//             _id: undefined, // avoid duplicate key error
-//             delivered: false,
-//             status: "Rejected",
-//             viewed: false,
-//         };
-//         await OrderDetails.create(rejectedOrder);
+        // ✅ Step 2: Save rejected copy BEFORE modifying anything
+        const rejectedOrder = {
+            ...order.toObject(),
+            _id: undefined, // avoid duplicate key error
+            delivered: false,
+            status: "Rejected",
+            viewed: false,
+        };
+        await OrderDetails.create(rejectedOrder);
 
-//         // ✅ Step 3: Restore coins
-//         const user = await User.findOne({ userID: userID.trim() });
-//         if (user) {
-//             user.coins += totalAmount;
-//             await user.save();
-//         }
+        // ✅ Step 3: Restore coins
+        const user = await User.findOne({ userID: userID.trim() });
+        if (user) {
+            user.coins += totalAmount;
+            await user.save();
+        }
 
-//         // ✅ Step 4: Restore product quantity
-//         const getShopProductModel = (shopName) => {
-//             return mongoose.model(shopName, shopProductSchema, shopName);
-//         };
-//         const ShopProduct = getShopProductModel(shopName);
-//         const product = await ShopProduct.findOne({ productName });
-//         if (product) {
-//             product.quantity += quantity;
-//             await product.save();
-//         }
+        // ✅ Step 4: Restore product quantity
+        const getShopProductModel = (shopName) => {
+            return mongoose.model(shopName, shopProductSchema, shopName);
+        };
+        const ShopProduct = getShopProductModel(shopName);
+        const product = await ShopProduct.findOne({ productName });
+        if (product) {
+            product.quantity += quantity;
+            await product.save();
+        }
 
-//         // ✅ Step 5: Delete the original pending order
-//         await OrderDetails.findByIdAndDelete(orderId);
+        // ✅ Step 5: Delete the original pending order
+        await OrderDetails.findByIdAndDelete(orderId);
 
-//         res.status(200).json({ message: "Order declined and stored as rejected" });
-//     } catch (error) {
-//         console.error("Error in decline route:", error);
-//         res.status(500).json({ message: "Internal Server Error" });
-//     }
-// });
+        res.status(200).json({ message: "Order declined and stored as rejected" });
+    } catch (error) {
+        console.error("Error in decline route:", error);
+        res.status(500).json({ message: "Internal Server Error" });
+    }
+});
 
 
 
